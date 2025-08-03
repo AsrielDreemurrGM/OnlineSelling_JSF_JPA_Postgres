@@ -1,6 +1,6 @@
 <h1>OnlineSelling_JSF_JPA_Postgres</h1>
 <p>
-  This README is also available in <a href="./README.pt-br.md">Português</a>
+  Este README também está disponível em <a href="./README.pt-br.md">Português</a>
 </p>
 <p>
   A full-stack Java web application built with JSF (Jakarta Faces), JPA (Jakarta Persistence), and PostgreSQL. The project uses WildFly 30 as the deployment server and follows Jakarta EE standards. It demonstrates how to implement a functional product management system with JSF forms, PrimeFaces components, AJAX interactions, and a layered MVC structure using CDI.
@@ -47,4 +47,3 @@
   <li>CDI is enabled via <code>beans.xml</code> for injection support.</li>
   <li>The form supports AJAX interaction for smooth validation and update experience.</li>
 </ul>
-
