@@ -1,89 +1,101 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Product Management</title>
+    <style>
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        .form-group p\\:inputText,
+        .form-group p\\:inputTextarea,
+        .form-group input[type="text"],
+        .form-group textarea {
+            max-width: 240px;
+            width: 100%;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        #searchForm .ui-button {
+            margin-left: 1rem;
+        }
+    </style>
 </h:head>
 <h:body>
-
     <h:form id="productForm">
-        <h2>Product Registration</h2>
-
-        <h:outputLabel for="name" value="Name: " />
-        <h:inputText id="name" value="#{productController.product.name}" required="true" />
-        <br /><br />
-
-        <h:outputLabel for="description" value="Description: " />
-        <h:inputTextarea id="description" value="#{productController.product.description}" rows="3" cols="30" />
-        <br /><br />
-
-        <h:outputLabel for="price" value="Price: " />
-        <h:inputText id="price" value="#{productController.product.price}">
-            <f:convertNumber />
-        </h:inputText>
-        <br /><br />
-
-        <h:outputLabel for="stock" value="Stock: " />
-        <h:inputText id="stock" value="#{productController.product.stock}">
-            <f:convertNumber integerOnly="true" />
-        </h:inputText>
-        <br /><br />
-
-        <h:commandButton value="Save" action="#{productController.save}">
-            <f:ajax execute="@form" render="@form productList" />
-        </h:commandButton>
-        <h:commandButton value="Clear" action="#{productController.clear}" immediate="true">
-            <f:ajax execute="@form" render="@form productList" />
-        </h:commandButton>
+        <p:panel header="Product Registration">
+            <p:messages id="messages" />
+            <div class="form-group">
+                <p:outputLabel for="name" value="Name:" />
+                <p:inputText id="name" value="#{productController.product.name}" required="true" />
+            </div>
+            <div class="form-group">
+                <p:outputLabel for="description" value="Description:" />
+                <p:inputTextarea id="description" value="#{productController.product.description}" rows="3" cols="30" />
+            </div>
+            <div class="form-group">
+                <p:outputLabel for="price" value="Price:" />
+                <p:inputText id="price" value="#{productController.product.price}" required="true">
+                    <f:convertNumber />
+                </p:inputText>
+            </div>
+            <div class="form-group">
+                <p:outputLabel for="stock" value="Stock:" />
+                <p:inputText id="stock" value="#{productController.product.stock}">
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+            </div>
+            <div class="button-group">
+                <p:commandButton value="Save" action="#{productController.save}" update="@form productList" />
+                <p:commandButton value="Clear" action="#{productController.clear}" update="@form productList"
+                    immediate="true" />
+            </div>
+        </p:panel>
     </h:form>
-
     <h:form id="searchForm">
-        <h2>Search Products</h2>
-        <h:inputText value="#{productController.searchTerm}" />
-        <h:commandButton value="Search" action="#{productController.search}">
-            <f:ajax execute="@form" render="productList" />
-        </h:commandButton>
+        <p:panel header="Search Products">
+            <p:inputText value="#{productController.searchTerm}" />
+            <p:commandButton value="Search" action="#{productController.search}" update="productList" />
+        </p:panel>
     </h:form>
-
     <h:form id="productList">
-        <h2>Product List</h2>
-        <h:dataTable value="#{productController.products}" var="p" border="1" cellpadding="5">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                #{p.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{p.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Description</f:facet>
-                #{p.description}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Price</f:facet>
-                <h:outputText value="#{p.price}">
-                    <f:convertNumber type="currency" currencySymbol="$" />
-                </h:outputText>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Stock</f:facet>
-                #{p.stock}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Actions</f:facet>
-                <h:commandLink action="#{productController.edit}">
-                    <f:setPropertyActionListener target="#{productController.product}" value="#{p}" />
-                    <f:ajax execute="@this" render=":productForm" />
-                    Edit
-                </h:commandLink>
-                |
-                <h:commandLink action="#{productController.delete(p.id)}" value="Delete">
-                    <f:ajax render="productList productForm" />
-                </h:commandLink>
-            </h:column>
-        </h:dataTable>
+        <p:panel header="Product List">
+            <p:dataTable value="#{productController.products}" var="p" responsiveLayout="scroll">
+                <p:column headerText="ID">
+                    #{p.id}
+                </p:column>
+                <p:column headerText="Name">
+                    #{p.name}
+                </p:column>
+                <p:column headerText="Description">
+                    #{p.description}
+                </p:column>
+                <p:column headerText="Price">
+                    <h:outputText value="#{p.price}">
+                        <f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Stock">
+                    #{p.stock}
+                </p:column>
+                <p:column headerText="Actions">
+                    <p:commandLink action="#{productController.edit}" update=":productForm">
+                        <f:setPropertyActionListener target="#{productController.product}" value="#{p}" />
+                        Edit
+                    </p:commandLink>
+                    |
+                    <p:commandLink action="#{productController.delete(p.id)}" value="Delete"
+                        update="productForm productList" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
     </h:form>
-
 </h:body>
 </html>
