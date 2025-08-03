@@ -32,6 +32,10 @@ public class ProductController implements Serializable {
         return product;
     }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public List<Product> getProducts() {
         return products;
     }
@@ -40,20 +44,15 @@ public class ProductController implements Serializable {
         productService.save(product);
         products = productService.findAll();
         product = new Product();
-        return "productForm.xhtml";
+        return null;
     }
 
-    public String edit(Long id) {
-        this.product = productService.findById(id);
-        if (this.product == null) {
-            this.product = new Product();
-        }
-        return "productForm.xhtml";
-    }
+    public void edit() {}
 
     public String delete(Long id) {
         productService.delete(id);
-        return "productForm.xhtml";
+        products = productService.findAll();
+        return null;
     }
 
     public String getSearchTerm() {
@@ -74,7 +73,7 @@ public class ProductController implements Serializable {
     }
 
     public String clear() {
-        this.product = new Product();
-        return "productForm.xhtml";
+        product = new Product();
+        return null;
     }
 }
