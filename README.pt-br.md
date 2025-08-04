@@ -47,3 +47,14 @@
   <li>O CDI está habilitado via <code>beans.xml</code> para suporte à injeção de dependência.</li>
   <li>O formulário possui interação via AJAX para uma experiência de validação e atualização mais fluida.</li>
 </ul>
+<h2>🗂️ Branches Adicionais</h2>
+<ul>
+  <li>
+    <strong><code>tomcat-deploy-version</code></strong>: Versão alternativa do projeto adaptada para deploy manual com Apache Tomcat.
+    <ul>
+      <li>Criada para cumprir uma atividade prática do curso.</li>
+      <li>Utiliza uma estratégia de deploy diferente, sem configurações específicas do WildFly.</li>
+      <li>Essa branch não deve ser mesclada com a <code>main</code>.</li>
+    </ul>
+  </li>
+</ul>

@@ -47,3 +47,14 @@
   <li>CDI is enabled via <code>beans.xml</code> for injection support.</li>
   <li>The form supports AJAX interaction for smooth validation and update experience.</li>
 </ul>
+<h2>🗂️ Additional Branches</h2>
+<ul>
+  <li>
+    <strong><code>tomcat-deploy-version</code></strong>: Alternate version of this project adapted for manual deployment on Apache Tomcat.
+    <ul>
+      <li>Created to complete a deployment task during the course.</li>
+      <li>Uses a different deployment strategy, without WildFly-specific configurations.</li>
+      <li>This branch is not intended to be merged into <code>main</code>.</li>
+    </ul>
+  </li>
+</ul>
