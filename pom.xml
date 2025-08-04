@@ -53,11 +53,23 @@
       <scope>provided</scope>
     </dependency>
 
-        <dependency>
+    <dependency>
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>13.0.0</version>
       <classifier>jakarta</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.weld.servlet</groupId>
+      <artifactId>weld-servlet-shaded</artifactId>
+      <version>5.1.0.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.weld.environment</groupId>
+      <artifactId>weld-environment-common</artifactId>
+      <version>5.1.0.Final</version>
     </dependency>
   </dependencies>
 </project>
